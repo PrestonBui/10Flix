@@ -1,0 +1,12 @@
+:root {
+  --primary-color: #29224b;
+  background-color: var(--primary-color);
+}
+.body {
+  color: white;
+}
+
+.home-title {
+  font-size: 50px;
+  color: white;
+}
