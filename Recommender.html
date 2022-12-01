@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="Recommender.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -54,4 +54,27 @@
       </div>
     </div>
   </nav>
+</nav>
+<div class="mainPage">
+  <div class="search_body">
+    <label for="recommender-input"
+      ><h2 style="color: #f5f5f5; font-size:3rem; margin-bottom:20px;">Recommend me Movies similar to&nbsp;</h2></label
+    >
+    <div class="form_input">
+      <form id="rec-form">
+        <input
+          type="text"
+          class="ratings"
+          id="recommender-input"
+          name="searchTerm"
+          placeholder="Enter Movie Name"
+        />
+        <button type="submit" class="btn-form">Submit</button>
+      </form>
+    </div>
+  </div>
+  <main id="main"></main>
+  <script src="recommender-script.js"></script>
+</div>
+
 </html>
