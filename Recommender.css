@@ -600,3 +600,10 @@ section {
 .form-group {
   text-align: center;
 }
+
+.add-watchlist2 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0.5;
+}
