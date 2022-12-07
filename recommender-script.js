@@ -12,6 +12,8 @@ const searchURL = BASE_URL + "/search/movie?" + API_KEY;
 
 let searchTerm = "";
 
+let results = [];
+
 // getMovies(API_URL);
 
 function getMovies(url) {
@@ -36,7 +38,8 @@ function getRecommendedMovies(url) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data.results);
-      showMovies(data.results);
+      results = data.results;
+      showMovies(results);
     });
 }
 
@@ -69,12 +72,12 @@ function getAddRemoveWatchlistText(movieID) {
   if (
     watchlist &&
     watchlist.find((movie) => {
-      console.log("movie.id: ", movie.id, "movieID: ", movieID);
+      //   console.log("movie.id: ", movie.id, "movieID: ", movieID);
       if (movie.id == movieID) {
-        console.log("Movie IDs are EQUAL");
+        // console.log("Movie IDs are EQUAL");
         return true;
       }
-      console.log("Movie IDs are NOT EQUAL");
+      //   console.log("Movie IDs are NOT EQUAL");
       return false;
     })
   ) {
@@ -95,21 +98,31 @@ function setWatchlist(watchlist) {
 function addMovieToWatchlist(movieID) {
   console.log("addMovieToWatchlist: ", movieID);
   let watchlist = getWatchlist();
-  watchlist.push({ id: movieID });
+  console.log("results: ", results);
+  let movie = results.find((movie) => movie.id == movieID);
+  console.log("movie: ", JSON.stringify(movie));
+  watchlist.push({
+    id: movie.id,
+    title: movie.title,
+    poster_path: movie.poster_path,
+    vote_average: movie.vote_average,
+    overview: movie.overview,
+  });
   setWatchlist(watchlist);
 }
 
 function removeMovieFromWatchlist(movieID) {
+  console.log("removeMovieFromWatchlist: ", movieID);
   let watchlist = getWatchlist();
-  setWatchlist(watchlist.filter((movie) => movie.id !== movieID));
+  setWatchlist(watchlist.filter((movie) => movie.id != movieID));
 }
 
 function watchlistHandler(movieID) {
   console.log("watchlistHandler movieID: ", movieID);
   if (movieID) {
     const watchlist = getWatchlist();
-    console.log("watchlist: ", watchlist);
-    if (watchlist && watchlist.find((movie) => movie.id === movieID)) {
+    // console.log("watchlist: ", watchlist);
+    if (watchlist && watchlist.find((movie) => movie.id == movieID)) {
       removeMovieFromWatchlist(movieID);
       console.log("removeMovieFromWatchlist: ", movieID);
     } else {
